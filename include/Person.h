@@ -9,15 +9,15 @@ class Person
     public:
         Person(string firstName, string lastName, unsigned short age);
         virtual ~Person();
-        void display();
+        virtual void display();
 
     protected:
-
-    private:
         unsigned short id = 0;
         string firstName;
         string lastName;
         unsigned short age;
+
+    private:
 };
 
 #endif // PERSON_H
