@@ -1,29 +1,28 @@
 #include <iostream>
-#include "Person.h"
-#include "Employe.h"
+#include <windows.h>
+#include "DatabaseManager.h"
 
+int main() {
 
-using namespace std;
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
 
-int main()
-{
-    //Person louiBase("loui","sahraoui",21); without keyword const
-    //louiBase->display();
-    //Employe* louiEmployee = new Employe(louiBase, "Manager", 2550.0, 2023);
-    //louiEmployee->display();
+    DatabaseManager db;
 
+    if (!db.connect("localhost", "root", "", "employes_manager_db", 3306)) {
+        std::cerr << "Erreur connexion: " << db.lastError() << std::endl;
+        return 1;
+    }
+    std::cout << "✅ Connexion réussie !" << std::endl;
 
-    Person* rahaf = new Person("rahaf","sahraoui",8);
-    rahaf->display();
+    auto users = db.listUsers();
+    for (const auto& u : users) {
+        u.display();
+        std::cout << "Login: " << u.getUsername()
+                  << " | Rôle: " << u.getRole()
+                  << std::endl;
+    }
 
-    Employe* loui = new Employe(Person("loui","sahraoui",21), "Manager", 2550.0, 2023);
-    loui->display();
-
-
-
-    delete rahaf;
-    delete loui;
-
-
+    db.disconnect();
     return 0;
 }
