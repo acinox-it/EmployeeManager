@@ -1,23 +1,29 @@
 #include "Employe.h"
+#include <iostream>
 
-Employe::Employe(const Person &person, string position, double salary, unsigned short joinedDate):
-    Person(person), position(position), salary(salary), joinedDate(joinedDate) {}
+using namespace std;
 
-Employe::~Employe()
-{
-    //dtor
+Employe::Employe() : salary(0.0), joinedYear(0) {}
+
+Employe::~Employe() {}
+
+double Employe::calculateBonus() const {
+    double base = salary * 0.05;
+    double seniority = (salary * 0.01) * (calculateSeniority(2025));
+    return base + seniority;
 }
 
-double Employe::calculateBonus()
-{
-    double base = salary * 0.1; // Employee Position
-    double anciennete = salary * (2025-joinedDate) * 0.05;
-    return base + anciennete;
+int Employe::calculateSeniority(int currentYear) const {
+    if (joinedYear == 0) return 0;
+    return currentYear - joinedYear;
 }
 
-void Employe::display()
+void Employe::display() const
 {
     Person::display();
-    cout<<"Position: "<<position<<endl;
-    cout<<"Salary: "<<salary<<endl;
+    cout<<"Post: "<<position<<endl;
+    cout<<"Salaire: "<<salary<<endl;
+    cout<<"Annee d'entree: " << joinedYear<<endl;
+    cout<<"Bonus estime: "<<calculateBonus()<<endl;
+
 }

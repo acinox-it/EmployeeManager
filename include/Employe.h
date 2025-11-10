@@ -1,25 +1,36 @@
 #ifndef EMPLOYE_H
 #define EMPLOYE_H
-#include <iostream>
-#include "Person.h"
 
-using namespace std;
+#include "Person.h"
 
 class Employe: public Person
 {
     public:
-        Employe(const Person &person, string position, double salary, unsigned short joinedDate);
+        Employe();
         virtual ~Employe();
-        double calculateBonus();
-        void display() override;
+
+        //Getters - Setters
+        std::string getPosition() const { return position; }
+        void setPosition(const std::string& p) { position = p; }
+
+        double getSalary() const { return salary; }
+        void setSalary(double s) { salary = s; }
+
+        int getJoinedYear() const { return joinedYear; }
+        void setJoinedYear(int y) { joinedYear = y; }
+
+        double calculateBonus() const;
+        int calculateSeniority(int currentYear) const;
+
+        //Polymorph Person::display()
+        void display() const override;
 
     protected:
+        std::string position;
+        double salary;
+        int joinedYear;
 
     private:
-        string position;
-        double salary;
-        unsigned short joinedDate;
-
 };
 
 #endif // EMPLOYE_H

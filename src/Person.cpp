@@ -1,19 +1,18 @@
 #include "Person.h"
+#include <iostream>
 
-Person::Person(string firstName, string lastName, unsigned short age):
-    firstName(firstName), lastName(lastName), age(age){}
+using namespace std;
 
-Person::~Person()
-{
-    //dtor
-}
+Person::Person() : id(0) {}
 
-void Person::display()
+Person::~Person() {}
+
+void Person::display() const
 {
     cout<<"----------------------------"<<endl;
     cout<<"Id: "<<id<<endl;
-    cout<<"First Name: "<<firstName<<endl;
-    cout<<"Last Name: "<<lastName<<endl;
-    cout<<"Age: "<<age<<endl;
-
+    cout<<"Prenom: "<<firstName<<endl;
+    cout<<"Nom: "<<lastName<<endl;
+    cout<<"Date de naissance: "<<birthDate<<endl;
+    cout<<endl;
 }

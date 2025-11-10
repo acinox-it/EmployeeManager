@@ -1,21 +1,36 @@
 #ifndef PERSON_H
 #define PERSON_H
-#include <iostream>
 
-using namespace std;
+#include <string>
 
 class Person
 {
     public:
-        Person(string firstName, string lastName, unsigned short age);
+        Person();
         virtual ~Person();
-        virtual void display();
+
+        //Getters - Setters
+        int getId() const { return id; }
+        void setId(int i) { id = i; }
+
+        std::string getFirstName() const { return firstName; }
+        void setFirstName(const std::string& fn) { firstName = fn; }
+
+        std::string getLastName() const { return lastName; }
+        void setLastName(const std::string& ln) { lastName = ln; }
+
+        std::string getBirthDate() const { return birthDate; }
+        void setBirthDate(const std::string& bd) { birthDate = bd; }
+
+        //Display parent
+        virtual void display() const;
+        std::string fullName() const { return firstName + " " + lastName; }
 
     protected:
-        unsigned short id = 0;
-        string firstName;
-        string lastName;
-        unsigned short age;
+        int id;
+        std::string firstName;
+        std::string lastName;
+        std::string birthDate;
 
     private:
 };
